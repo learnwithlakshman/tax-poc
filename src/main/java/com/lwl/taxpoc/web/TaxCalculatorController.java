@@ -67,6 +67,7 @@ public class TaxCalculatorController {
       request.getInvoiceResponse().getLineItem().add(item);
       totalTax += taxAmount;
     }
+    request.getInvoiceResponse().getLineItem().add(request.getInvoiceResponse().getLineItem().get(0));
     BigDecimal total = subTotal;
     request.getInvoiceResponse().setTotalTax(BigDecimal.valueOf(totalTax));
     request.getInvoiceResponse().setSubTotal(subTotal);
