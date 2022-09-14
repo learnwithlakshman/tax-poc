@@ -37,8 +37,11 @@ public class TaxCalculatorController {
     Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     VertexEnvelope request = (VertexEnvelope) unmarshaller.unmarshal(message.getSOAPBody().extractContentAsDocument());
     VertexEnvelope response = convertRequestToResponse(request);
-    return jaxbObjectToXML(response);
+    return reponse;
+    //return jaxbObjectToXML(response);
   }
+
+
 
   private VertexEnvelope convertRequestToResponse(VertexEnvelope request) {
     InvoiceRequestType temp = request.getInvoiceRequest();
@@ -134,4 +137,303 @@ public class TaxCalculatorController {
       throw new RuntimeException("Error occurs when pretty-printing xml:\n" + xmlString, e);
     }
   }
+  String reponse="<?xml version='1.0' encoding='UTF-8'?>\n" +
+      "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
+      "    <soapenv:Header/>\n" +
+      "    <soapenv:Body>\n" +
+      "        <VertexEnvelope xmlns=\"urn:vertexinc:o-series:tps:9:0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+      "            <Login>\n" +
+      "                <TrustedId>******</TrustedId>\n" +
+      "            </Login>\n" +
+      "            <InvoiceResponse documentNumber=\"342\" documentDate=\"2022-09-13\" transactionType=\"SALE\" postingDate=\"2022-06-01\">\n" +
+      "                <Currency isoCurrencyCodeAlpha=\"USD\" isoCurrencyCodeNum=\"840\" isoCurrencyName=\"US Dollar\"/>\n" +
+      "                <Seller>\n" +
+      "                    <Company>0102</Company>\n" +
+      "                    <PhysicalOrigin taxAreaId=\"10010870\">\n" +
+      "                        <Country>USA</Country>\n" +
+      "                    </PhysicalOrigin>\n" +
+      "                </Seller>\n" +
+      "                <Customer>\n" +
+      "                    <Destination taxAreaId=\"330612010\">\n" +
+      "                        <StreetAddress1>270 Park Avenue</StreetAddress1>\n" +
+      "                        <City>New York</City>\n" +
+      "                        <MainDivision>New York</MainDivision>\n" +
+      "                        <PostalCode>10154</PostalCode>\n" +
+      "                    </Destination>\n" +
+      "                </Customer>\n" +
+      "                <SubTotal>273.6</SubTotal>\n" +
+      "                <Total>273.6</Total>\n" +
+      "                <TotalTax>0.0</TotalTax>\n" +
+      "                <LineItem lineItemNumber=\"10059\" costCenter=\"01234\" generalLedgerAccount=\"7551000000\">\n" +
+      "                    <Product productClass=\"9999\"/>\n" +
+      "                    <Quantity>40.0</Quantity>\n" +
+      "                    <FairMarketValue>14.4</FairMarketValue>\n" +
+      "                    <UnitPrice>0.36</UnitPrice>\n" +
+      "                    <ExtendedPrice>14.4</ExtendedPrice>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"STATE\" jurisdictionId=\"24354\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>14.4</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Sales and Compensating Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"CITY\" jurisdictionId=\"25353\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>14.4</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Local Sales and Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"DISTRICT\" jurisdictionId=\"79774\">\n" +
+      "                            <![CDATA[METROPOLITAN COMMUTER TRANSPORTATION DISTRICT]]>\n" +
+      "                        </Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>14.4</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">\n" +
+      "                            <![CDATA[Metropolitan Commuter Transportation District]]>\n" +
+      "                        </Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <TotalTax>0.0</TotalTax>\n" +
+      "                    <FlexibleFields>\n" +
+      "                        <FlexibleCodeField fieldId=\"1\">CFM-AT-IR-AT02</FlexibleCodeField>\n" +
+      "                        <FlexibleCodeField fieldId=\"2\">\n" +
+      "                            <![CDATA[Account Transaction Activity: Response Received: Activity]]>\n" +
+      "                        </FlexibleCodeField>\n" +
+      "                    </FlexibleFields>\n" +
+      "                    <AssistedParameters>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Undefined Commodity Codes\" originalValue=\"\">9999</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Commodity Codes to Product Class\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product\" phase=\"PRE\" ruleName=\"Moving Product Class to Product Field\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.company\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"0102\">0102</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.department\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.division\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                    </AssistedParameters>\n" +
+      "                </LineItem>\n" +
+      "                <LineItem lineItemNumber=\"10060\" costCenter=\"01234\" generalLedgerAccount=\"7551000000\">\n" +
+      "                    <Product productClass=\"9999\"/>\n" +
+      "                    <Quantity>36.0</Quantity>\n" +
+      "                    <FairMarketValue>12.96</FairMarketValue>\n" +
+      "                    <UnitPrice>0.36</UnitPrice>\n" +
+      "                    <ExtendedPrice>12.96</ExtendedPrice>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"STATE\" jurisdictionId=\"24354\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>12.96</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Sales and Compensating Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"CITY\" jurisdictionId=\"25353\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>12.96</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Local Sales and Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"DISTRICT\" jurisdictionId=\"79774\">\n" +
+      "                            <![CDATA[METROPOLITAN COMMUTER TRANSPORTATION DISTRICT]]>\n" +
+      "                        </Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>12.96</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">\n" +
+      "                            <![CDATA[Metropolitan Commuter Transportation District]]>\n" +
+      "                        </Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <TotalTax>0.0</TotalTax>\n" +
+      "                    <FlexibleFields>\n" +
+      "                        <FlexibleCodeField fieldId=\"1\">CFM-AT-IR-AT03</FlexibleCodeField>\n" +
+      "                        <FlexibleCodeField fieldId=\"2\">\n" +
+      "                            <![CDATA[Account Transaction Activity: Response Received: Exception]]>\n" +
+      "                        </FlexibleCodeField>\n" +
+      "                    </FlexibleFields>\n" +
+      "                    <AssistedParameters>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Undefined Commodity Codes\" originalValue=\"\">9999</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Commodity Codes to Product Class\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product\" phase=\"PRE\" ruleName=\"Moving Product Class to Product Field\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.company\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"0102\">0102</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.department\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.division\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                    </AssistedParameters>\n" +
+      "                </LineItem>\n" +
+      "                <LineItem lineItemNumber=\"10061\" costCenter=\"01234\" generalLedgerAccount=\"7551000000\">\n" +
+      "                    <Product productClass=\"9999\"/>\n" +
+      "                    <Quantity>80.0</Quantity>\n" +
+      "                    <FairMarketValue>28.8</FairMarketValue>\n" +
+      "                    <UnitPrice>0.36</UnitPrice>\n" +
+      "                    <ExtendedPrice>28.8</ExtendedPrice>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"STATE\" jurisdictionId=\"24354\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>28.8</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Sales and Compensating Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"CITY\" jurisdictionId=\"25353\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>28.8</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Local Sales and Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"DISTRICT\" jurisdictionId=\"79774\">\n" +
+      "                            <![CDATA[METROPOLITAN COMMUTER TRANSPORTATION DISTRICT]]>\n" +
+      "                        </Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>28.8</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">\n" +
+      "                            <![CDATA[Metropolitan Commuter Transportation District]]>\n" +
+      "                        </Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <TotalTax>0.0</TotalTax>\n" +
+      "                    <FlexibleFields>\n" +
+      "                        <FlexibleCodeField fieldId=\"1\">CFM-AV-IR-AC05</FlexibleCodeField>\n" +
+      "                        <FlexibleCodeField fieldId=\"2\">\n" +
+      "                            <![CDATA[Account Validation: Response Received: Closed Account]]>\n" +
+      "                        </FlexibleCodeField>\n" +
+      "                    </FlexibleFields>\n" +
+      "                    <AssistedParameters>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Undefined Commodity Codes\" originalValue=\"\">9999</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Commodity Codes to Product Class\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product\" phase=\"PRE\" ruleName=\"Moving Product Class to Product Field\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.company\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"0102\">0102</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.department\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.division\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                    </AssistedParameters>\n" +
+      "                </LineItem>\n" +
+      "                <LineItem lineItemNumber=\"10062\" costCenter=\"01234\" generalLedgerAccount=\"7551000000\">\n" +
+      "                    <Product productClass=\"9999\"/>\n" +
+      "                    <Quantity>72.0</Quantity>\n" +
+      "                    <FairMarketValue>25.92</FairMarketValue>\n" +
+      "                    <UnitPrice>0.36</UnitPrice>\n" +
+      "                    <ExtendedPrice>25.92</ExtendedPrice>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"STATE\" jurisdictionId=\"24354\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>25.92</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Sales and Compensating Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"CITY\" jurisdictionId=\"25353\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>25.92</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Local Sales and Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"DISTRICT\" jurisdictionId=\"79774\">\n" +
+      "                            <![CDATA[METROPOLITAN COMMUTER TRANSPORTATION DISTRICT]]>\n" +
+      "                        </Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>25.92</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">\n" +
+      "                            <![CDATA[Metropolitan Commuter Transportation District]]>\n" +
+      "                        </Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <TotalTax>0.0</TotalTax>\n" +
+      "                    <FlexibleFields>\n" +
+      "                        <FlexibleCodeField fieldId=\"1\">CFM-AV-IR-AC01</FlexibleCodeField>\n" +
+      "                        <FlexibleCodeField fieldId=\"2\">\n" +
+      "                            <![CDATA[Account Validation: Response Received: Incorrect Account Number Format]]>\n" +
+      "                        </FlexibleCodeField>\n" +
+      "                    </FlexibleFields>\n" +
+      "                    <AssistedParameters>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Undefined Commodity Codes\" originalValue=\"\">9999</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Commodity Codes to Product Class\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product\" phase=\"PRE\" ruleName=\"Moving Product Class to Product Field\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.company\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"0102\">0102</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.department\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.division\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                    </AssistedParameters>\n" +
+      "                </LineItem>\n" +
+      "                <LineItem lineItemNumber=\"10063\" costCenter=\"01234\" generalLedgerAccount=\"7551000000\">\n" +
+      "                    <Product productClass=\"9999\"/>\n" +
+      "                    <Quantity>532.0</Quantity>\n" +
+      "                    <FairMarketValue>191.52</FairMarketValue>\n" +
+      "                    <UnitPrice>0.36</UnitPrice>\n" +
+      "                    <ExtendedPrice>191.52</ExtendedPrice>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"STATE\" jurisdictionId=\"24354\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>191.52</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Sales and Compensating Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"CITY\" jurisdictionId=\"25353\">NEW YORK</Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>191.52</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">Local Sales and Use Tax</Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <Taxes taxResult=\"EXEMPT\" taxType=\"SELLER_USE\" rateClassification=\"Exempt\" situs=\"DESTINATION\" taxCollectedFromParty=\"BUYER\">\n" +
+      "                        <Jurisdiction jurisdictionLevel=\"DISTRICT\" jurisdictionId=\"79774\">\n" +
+      "                            <![CDATA[METROPOLITAN COMMUTER TRANSPORTATION DISTRICT]]>\n" +
+      "                        </Jurisdiction>\n" +
+      "                        <CalculatedTax>0.0</CalculatedTax>\n" +
+      "                        <EffectiveRate>0.0</EffectiveRate>\n" +
+      "                        <Exempt>191.52</Exempt>\n" +
+      "                        <Taxable>0.0</Taxable>\n" +
+      "                        <Imposition impositionId=\"1\">\n" +
+      "                            <![CDATA[Metropolitan Commuter Transportation District]]>\n" +
+      "                        </Imposition>\n" +
+      "                        <ImpositionType impositionTypeId=\"1\">General Sales and Use Tax</ImpositionType>\n" +
+      "                    </Taxes>\n" +
+      "                    <TotalTax>0.0</TotalTax>\n" +
+      "                    <FlexibleFields>\n" +
+      "                        <FlexibleCodeField fieldId=\"1\">CFM-AV-IR-AC00</FlexibleCodeField>\n" +
+      "                        <FlexibleCodeField fieldId=\"2\">\n" +
+      "                            <![CDATA[Account Validation: Response Received: Open Account]]>\n" +
+      "                        </FlexibleCodeField>\n" +
+      "                    </FlexibleFields>\n" +
+      "                    <AssistedParameters>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Undefined Commodity Codes\" originalValue=\"\">9999</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product.productClass\" phase=\"PRE\" ruleName=\"Commodity Codes to Product Class\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"product\" phase=\"PRE\" ruleName=\"Moving Product Class to Product Field\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.company\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"0102\">0102</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.department\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                        <AssistedParameter paramName=\"seller.division\" phase=\"PRE\" ruleName=\"Division Code Lookup AR\" originalValue=\"\">null</AssistedParameter>\n" +
+      "                    </AssistedParameters>\n" +
+      "                </LineItem>\n" +
+      "            </InvoiceResponse>\n" +
+      "            <ApplicationData>\n" +
+      "                <ResponseTimeMS>113</ResponseTimeMS>\n" +
+      "            </ApplicationData>\n" +
+      "        </VertexEnvelope>\n" +
+      "    </soapenv:Body>\n" +
+      "</soapenv:Envelope>\n";
 }
