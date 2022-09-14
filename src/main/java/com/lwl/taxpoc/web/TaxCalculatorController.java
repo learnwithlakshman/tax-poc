@@ -37,8 +37,7 @@ public class TaxCalculatorController {
     Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     VertexEnvelope request = (VertexEnvelope) unmarshaller.unmarshal(message.getSOAPBody().extractContentAsDocument());
     VertexEnvelope response = convertRequestToResponse(request);
-    return reponse;
-    //return jaxbObjectToXML(response);
+    return jaxbObjectToXML(response);
   }
 
 
